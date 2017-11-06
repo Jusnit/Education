@@ -1,0 +1,119 @@
+body {
+    background-image: url('bg1.jpg');
+    font-family: Arial, 微軟正黑體;
+}
+
+.main {
+    width: 80%;
+    height: 800px;
+    max-width: 1200px;
+    min-width: 600px;
+    margin: auto auto;
+    align-items: center;
+    display: flex;
+}
+
+.main .main-inner {
+    width: 100%;
+}
+
+.main .title {
+    width: 100%;
+    text-align: left;
+    line-height: 70px;
+    font-size: 50px;
+    margin-bottom: 70px;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.main .img-container-wrapper {
+    overflow: hidden;
+}
+
+.main .img-container {
+    width: 22%;
+    height: auto;
+    float: left;
+    align-items: center;
+    vertical-align: center;
+    position: relative;
+}
+
+.main .img-container .selection {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    line-height: 50px;
+    background-color: rgb(221, 221, 221);
+    font-weight: bold;
+}
+
+.main .img-wrapper {
+    width: 100%;
+}
+
+.main .img-container .text-wrapper {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 30px;
+    line-height: 30px;
+    color: #ffffff;
+}
+
+.main .spacer {
+    width: 4%;
+    float: left;
+    min-height: 10px;
+}
+
+.img-wrapper {
+    height: auto;
+    width: 100%;
+    border-radius: 50%;
+}
+
+.text-wrapper {
+    line-height: 30px;
+    text-align: center;
+    font-weight: bold;
+}
+
+img {
+    border-radius: 50%;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.main .progress-wrapper {
+    width: 100%;
+    margin-top: 30px;
+    align-items: center;
+}
+
+.progress-wrapper progress {
+    width: 300px;
+}
+
+.progress-wrapper .progress-div {
+    width: 100%;
+    text-align: center;
+}
+
+progress[value] {
+    -webkit-appearance: none;
+    margin: 0 auto;
+    background-color: #5c24c4;
+    color: #5c24c4;
+    background: #5c24c4;
+}
+
+.profress-wrapper .text-wrapper {
+    line-height: 20px;
+    font-size: 20px;
+    color: #ffffff;
+}

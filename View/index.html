@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="client.js"></script>
+    <script>
+        $(function() {
+            var stage = 1;
+            $('button').on('click', function() {
+                var score_sum = 0;
+                $('div input:checked').each(function() {
+                    score_sum += Number($(this).attr('value'));
+                });
+                //現在score_sum就是勾選的checkbox 分數總合
+                console.log("sum", score_sum);
+                $('progress').attr('value', Number($('progress').attr('value')) + 1);
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <div class='main'>
+        <div class='main-inner'>
+            <div class='title'>選擇喜歡的球球照片!
+                <button>send</button>
+            </div>
+            <div class='img-container-wrapper'>
+                <div class='img-container'>
+                    <div class='img-wrapper'>
+                        <img src='ballball.jpg'>
+                        <div class='selection'>A</div>
+                        </img>
+                    </div>
+                    <div class='text-wrapper'>Picture 1
+                        <input type="checkbox" value='1'></input>
+                    </div>
+                </div>
+                <div class='spacer'></div>
+                <div class='img-container'>
+                    <div class='img-wrapper'>
+                        <img src='ballball.jpg'>
+                        <div class='selection'>B
+                        </div>
+                        </img>
+                    </div>
+
+                    <div class='text-wrapper'>Picture 2
+                        <input type="checkbox" value='2'></input>
+                    </div>
+                </div>
+                <div class='spacer'></div>
+                <div class='img-container'>
+                    <div class='img-wrapper'>
+                        <img src='ballball.jpg'>
+                        <div class='selection'>C</div>
+                        </img>
+                    </div>
+
+                    <div class='text-wrapper'>Picture 3
+                        <input type="checkbox" value='3'></input>
+                    </div>
+                </div>
+                <div class='spacer'></div>
+                <div class='img-container'>
+                    <div class='img-wrapper'>
+                        <img src='ballball.jpg'>
+                        <div class='selection'>D</div>
+                        </img>
+                    </div>
+
+                    <div class='text-wrapper'>Picture 4
+                        <input type="checkbox" value='4'></input>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class='progress-wrapper'>
+                    <div class='progress-div'>
+                        <progress value='1' max='10'>
+
+                        </progress>
+                    </div>
+                    <div class='text-wrapper'>1/10</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
