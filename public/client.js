@@ -23,7 +23,7 @@ $(function() {
         $.ajax({
             type: 'POST',
             url: '/send',
-            data: 'type=' + result
+            data: 'type=' + result + '&score=' + score_sum
         }).done(function(res) {
             console.log('Result :', result);
         }).fail(function() {

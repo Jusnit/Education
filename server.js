@@ -7,103 +7,110 @@
 // }).listen(process.env.PORT||3000)
 
 var express = require('express');
-// const hbs = require('hbs');
-// var exphbs = require('express-handlebars');
+var Datastore = require('@google-cloud/datastore');
 var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
 var parseUrlEncoded = bodyParser.urlencoded({ extended: false });
-// var passport = require('passport');
-// var LocalStrategy = require('passport-local').Strategy;
-// var cookieParser = require('cookie-parser');
+
 var mongoose = require('mongoose');
 var uristring = process.env.MONGODB_URI || 'mongodb://localhost/ballball';
 var statistics = require('./model/account');
 mongoose.connect(uristring);
-//app.set('view engine', 'hbs');
 app.use(express.static('public'));
 app.use(express.static(__dirname + '/View'));
 app.use(bodyParser.json());
 app.use(parseUrlEncoded);
-//app.use(require('express-session')({secret:'goodhaha'}));
-//app.use(passport.initialize());
-//app.use(passport.session());
-// passport.use(new LocalStrategy({
-//   usernameField:'user',
-//   passwordField:'password'
-//   },function(username, password, done){
-//     account.findOne({user:username}, function(err, user){
-//       if(err) return done(err);
-//       if(!user){
-//         console.log('No user found....')
-//         return done(null, false, {message:'incorrect name!'});
-//     }
-//       //list all keys in user(for test purpose)
-//       var keys = Object.keys(user._doc);
-//       console.log('keys of USER:'+ keys);
-//       user.comparePassword(password, user.password, function(err, isMatch){
-//         console.log('ismatch:'+isMatch);
-//         if(err) return done(err);
-//         if(isMatch === false){
-//           return done(null, false, {message:'incorrect password...'});
-//         }else{
-//           return done(null, user, {message:'successfully authenticating user...'});
-//         }
-//       });
-//     });
-// }));
-// passport.serializeUser(function(user, done){
-//   done(null, user.id);
-// });
-// passport.deserializeUser(function(id, done){
-//   account.findById(id, function(err, user){
-//     done(err, user);
-//   });
-// });
+var projectId = 'education-185212';
+const datastore = Datastore({
+    projectId: projectId
+});
 
+// The kind for the new entity
+const kind = 'Task';
+// The name/ID for the new entity
+const name = 'sampletask1';
+// The Cloud Datastore key for the new entity
+const taskKey = datastore.key([kind, name]);
+
+// Prepares the new entity
+const task = {
+    key: taskKey,
+    data: {
+        description: 'Buy milk update!'
+    }
+};
+
+// Saves the entity
+// const key = datastore.key('Personality');
+// const entity = {
+//     key: key,
+//     data: [{
+//             name: 'created',
+//             value: new Date().toJSON()
+//         },
+//         {
+//             name: 'description',
+//             value: 'hiiiiiii',
+//             excludeFromIndexes: true
+//         },
+//         {
+//             name: 'done',
+//             value: false
+//         }
+//     ]
+// };
+
+// datastore.save(entity);
+
+// datastore.update(task)
+//     .then(() => {
+//         // Task updated successfully.
+//     });
+// datastore.save(task)
+//     .then(() => {
+//         console.log(`Saved ${task.key.name}: ${task.data.description}`);
+//     })
+//     .catch((err) => {
+//         console.error('ERROR:', err);
+//     });
 app.get('/', function(req, res) {
-    // console.log('app.get("/") called..');
-    // var loghref = (!req.session.user) ? '/login' : '/logout';
-    // var logtext = (!req.session.user) ? 'Login' : 'Logout';
-    // res.render('index.hbs', { loginorout: logtext, loglink: loghref });
     console.log('connect to root');
     res.sendFile('index.html');
 
 });
 
 app.post('/send', function(req, res) {
-    //var newblock = req.body;
-    // account.count({user:req.body.email}, function(err, count){
-    //   if(err){
-    //     console.error(err);
-    //   }
-    //   if(count>0){
-    //     console.log('Account duplicated!');
-    //     res.status(201).json('Error : This Email has been registered!');
-    //   }else if(count == 0){
-    //     var newaccount = new account({
-    //       user:req.body.email,
-    //       password:req.body.password
-    //     });
-    //     newaccount.save(function(err, newaccount){
-    //       if(err) console.error(err);
-    //       console.log('new account has been created!');
-    //     })
-    //     res.status(201).json('sign up success!');
-    //   }else{
-    //     res.status(201).json('Bad response...');
-    //   }
+    // var new_record = new statistics({
+    //     type: req.body.type
     // });
-    var new_record = new statistics({
-        type: req.body.type
-    });
-    new_record.save(function(err, newrec) {
-        if (err) {
-            console.error(err);
-        } else {
-            res.status(201).json('successfully save type info..');
-        }
-    });
+    // new_record.save(function(err, newrec) {
+    //     if (err) {
+    //         console.error(err);
+    //     } else {
+    //         res.status(201).json('successfully save type info..');
+    //     }
+    // });
+    const key = datastore.key('Personality');
+    const entity = {
+        key: key,
+        data: [{
+                name: 'sneding_time',
+                value: new Date().toJSON()
+            },
+            {
+                name: 'type',
+                value: req.body.type,
+            },
+            {
+                name: 'score',
+                value: req.body.score
+            }
+        ]
+    };
+
+    datastore.save(entity);
+
 });
 // app.get('/record', function(req, res) {
 //     if (!req.session.user) {
