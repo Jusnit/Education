@@ -13,10 +13,10 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var parseUrlEncoded = bodyParser.urlencoded({ extended: false });
 
-var mongoose = require('mongoose');
-var uristring = process.env.MONGODB_URI || 'mongodb://localhost/ballball';
-var statistics = require('./model/account');
-mongoose.connect(uristring);
+//var mongoose = require('mongoose');
+//var uristring = process.env.MONGODB_URI || 'mongodb://localhost/ballball';
+//var statistics = require('./model/account');
+//mongoose.connect(uristring);
 app.use(express.static('public'));
 app.use(express.static(__dirname + '/View'));
 app.use(bodyParser.json());
